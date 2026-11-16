@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Pokémon Amarillo</title>
+  <title>Pokémon Yellow</title>
   <style>
     html, body {
       margin: 0;
@@ -21,20 +21,29 @@
       width: 100%;
       height: 100%;
     }
-    /* Asegura que el contenedor padre sea transparente y centre el botón */
-    #game > div {
+    /* Centra la pantalla inicial sin tocar el canvas cuando arranque el juego */
+    #game .ejs_start_screen,
+    #game > div:has(> .ejs_start_button),
+    #game > div:has(> button:only-child) {
       background: transparent !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
+      width: 100% !important;
+      height: 100% !important;
     }
-    /* Hace el botón Start Game pequeño y compacto */
-    #game button,
-    #game .ejs_start_button {
+    /* Fuerza el tamaño compacto solo en el botón de inicio */
+    #game .ejs_start_button,
+    #game > div > button:only-child {
+      position: relative !important;
+      inset: auto !important;
       width: auto !important;
       height: auto !important;
+      max-width: fit-content !important;
+      max-height: fit-content !important;
       min-width: unset !important;
       min-height: unset !important;
+      flex: 0 0 auto !important;
       background-color: #dc2626 !important;
       color: #ffffff !important;
       opacity: 1 !important;
@@ -56,7 +65,7 @@
   <script>
     EJS_player = '#game';
     EJS_core = 'gb';
-    EJS_gameUrl = 'pkmn_y.gb';
+    EJS_gameUrl = new URL('pkmn_y.gb', window.location.href).href;
     EJS_backgroundImage = new URL('portada.jpg', window.location.href).href;
     EJS_backgroundBlur = false;
     EJS_color = '#dc2626';
